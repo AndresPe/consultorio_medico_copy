@@ -4,7 +4,7 @@
   "description": "Proyecto base que permite la administración de citas en consultorios médicos , también se usará como caso de pruebas BDD, ATDD Y TDD.",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon src/app.js"
+    "test": "cucumber-js"
   },
   "repository": {
     "type": "git",
@@ -35,6 +35,7 @@
     "timeago.js": "^4.0.2"
   },
   "devDependencies": {
+    "@cucumber/cucumber": "^8.0.0-rc.1",
     "nodemon": "^2.0.14"
   }
 }
