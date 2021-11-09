@@ -1,0 +1,125 @@
+<style>
+    body {font-family: Arial;}
+
+    .containerTab{
+        margin-left: 15.5%;
+        margin-right: 20%;
+    }
+    
+    /* Estilo del tab */
+    .tab {
+      overflow: hidden;
+      border: 1px solid #ccc;
+      background-color: #f1f1f1;
+    }
+    
+    /* Estilo de los botones del tab */
+    .tab button {
+      background-color: inherit;
+      float: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 14px 16px;
+      transition: 0.3s;
+      font-size: 17px;
+    }
+    
+    /* cambio de color background hover */
+    .tab button:hover {
+      background-color: #ddd;
+    }
+    
+    /* Creat boton active */
+    .tab button.active {
+      background-color: #ccc;
+    }
+    
+    /* Estilo contenido del tab */
+    .tabcontent {
+      display: none;
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      border-top: none;
+    }
+</style>
+
+<h2>Administración de citas</h2>
+
+<div class="containerTab">
+    <div class="tab">
+        <button class="tablinks " onclick="openCity(event, 'Buscar')">Buscar</button>
+        <button class="tablinks" onclick="openCity(event, 'Registrar')">Registrar</button>
+    </div>
+      
+    <div id="Buscar" class="tabcontent">
+        <div class="col-md-5">
+            <div class="card col-mr-4">
+                <div class="card-body">
+                    <form action="/admin/" method="post">
+                        <div class="form-group">
+                            <label">Ingrese identificación del paciente a buscar</label>
+                            <input type="text" id="idPaciente" name="idPaciente" autofocus placeholder="Identificación" class="form-control mt-1">
+                        </div>
+                        <button type="submit" class="btn btn-success mt-3">
+                            Buscar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+    <div id="Registrar" class="tabcontent">
+        <div class="col-md-5">
+            <div class="card col-mr-4">
+                <div class="card-body">
+                    <form action="/admin/register/" method="post">
+                        <div class="form-group">
+                            <label">Ingrese identificación del paciente</label>
+                            <input type="text" name="idPaciente" autofocus placeholder="Identificación" class="form-control mt-1">
+                        </div>
+                        <div class="form-group mt-3">
+                            <label>Ingrese identificación del consultorio</label>
+                            <input type="text" name="idConsultorio" placeholder="Id consultorio" class="form-control">
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="start">Fecha de asignación</label>
+                            <input type="date" id="fechaAsignada" name="fechaAsignada" value="2021-11-8"
+                                min="2021-11-8" max="2030-12-31">
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="start">Hora de asignación</label>
+                            <input type="time" id="horaAsignada" name="horaAsignada"
+                                min="06:00" max="18:00" required>
+                        </div>
+                        <button type="submit" class="btn btn-success mt-3">
+                            Guardar cita
+                        </button>
+                    </form> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <% if (alerts) {%>
+        <div id="alertDataInvalid" class="alertDataInvalid alert-dismissible alert-warning">
+          <p class="mb-0"><%= alerts%></p>
+        </div>
+    <% } %>
+      
+    <script>
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</div>

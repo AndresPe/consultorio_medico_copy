@@ -1,0 +1,226 @@
+<%- include ('partials/_header')  %>
+
+
+<div id="banner" class="containerGreeting container-fluid">
+	<div class="row container-sm">
+		<div class="col-7 col-12-medium container-sm">
+			<h2>Bienvenidos a Verti</h2>
+			<p>Tu salud es nuestra prioridad.</p>
+		</div>
+		<div class="col-5 col-12-medium ">
+			<ul>
+				<button type="button" id="btnLogin" class="btnLogin btn btn-primary btn-lg">Inicia sesión</button>
+				<button type="button" id="btnSignIn" onclick="location.href='/home/sign-in/'" class="btn btn-primary btn-lg" >Registrarse</button>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="jumbotron">
+	<h1 class="display-3">Hello, world!</h1>
+	<p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+	<hr class="my-4">
+	<p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+	<p class="lead">
+	  <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+	</p>
+</div>
+<div class="overlay" id="overlay">
+	<div class="popup" id="popup">
+		<a href="" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+		<h3>INICIAR SESIÓN</h3>
+		<h4>Completa los datos para acceder.</h4>
+		<form action="/home" method="post">
+			<div class="contenedor-inputs">
+			<input type="text" name="idUser" class="form-control" placeholder="Usuario" autofocus>
+			<% if (data) {%>
+				<div id="alertDataInvalid" class="alertDataInvalid alert-dismissible alert-warning">
+					<p class="mb-0"><%= data%></p>
+				</div>
+			<% } %>
+			<input type="password" name="password" placeholder="Contraseña">
+			<div class="form-group">
+				<select class="userTipe custom-select" id="userTipe" name="userTipe">
+					<option value="0">Elige una opción</option>
+					<option value="1">Administrador</option> 
+					<option value="2">Afiliado <a href="/pacient/:idUser/"></a></option>
+				</select>
+			</div>
+			
+			</div>
+			<button type="submit" id="btn-submit" class="btn-submit btn btn-primary btn-lg">Inicia sesión</button>
+		</form>
+	</div>
+	<!--BLOQUE DE CÓDIGO DE JAVASCRIPT PARA DAR FUNCION AL BOTÖN LOGIN-->
+
+	<script>
+		/**VARIABLES QUE SE VAN A USAR PARA LA TOMA DE DATOS */
+		var btnAbrirPopup = document.getElementById('btnLogin'),
+			overlay = document.getElementById('overlay'),
+				popup = document.getElementById('popup'),
+				btnCerrarPopup = document.getElementById('btn-cerrar-popup');
+		/**SE CREA FUNCION PARA EL BOTON ABRIR POPUP */
+		btnAbrirPopup.addEventListener('click', function(){
+			overlay.classList.add('active');/**pone al ovelay en modo activo */
+			popup.classList.add('active');/**pone el popup en modo activo */
+		});
+		/**SE CREA LA FUNCION PARA EL BOTON CERRAR */
+		btnCerrarPopup.addEventListener('click', function(){
+			overlay.classList.remove('active'); /**quita el modo activo de overlay */
+			popup.classList.remove('active');/**quita el modo activo del popup */
+		});
+	</script>
+
+</div> 
+
+<!-- BLOQUE DE CODIGO CSS PARA DARLE ESTILO A LOS CONTENEDORES Y EFECTOS A EL POPUP-->
+<style type="text/css">
+	.containerGreeting {
+		align-content: center; 
+		margin-top: 80px;
+		display: flex;
+  		justify-content: center;
+	}
+	.jumbotron { 
+		margin-top: 80px;
+		justify-content: center;
+		align-content: center;
+		background: #CDCDCD;
+		width:max-content;       
+        height: 500px;
+		margin-left: 500px;
+		margin-right: 500px;
+	}
+
+	*{margin: 0px; padding: 0px;}
+	/*DARLE ESTILO AL POPUP*/
+	.overlay{/*es la pantalla en general del popup y mas a fondo oscuro cuando aparece la ventana*/
+		background: rgba(0, 0, 0, .4);
+		position: fixed;/*que el popup no se mueva*/
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		visibility: hidden; /* que no esté visible inicialmente*/
+	}
+	.overlay.active{
+		visibility: visible;
+	}
+	.popup{
+		background: #f8f8f8;
+		box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, .3);
+		border-radius: 3px;
+		font-family: 'Montserrat', sans-serif;/*tipo de fuente*/
+		padding: 20px;
+		text-align: center;
+		width: 500px;
+		color: black;
+		transition: .3s ease all;
+		transform: scale(0.7);
+		opacity: 0; /*volvemos el popup invisible jua jua jua*/
+
+	}
+	.popup .btn-cerrar-popup{
+		font-size: 16px;
+		line-height: 16px;
+		display: block;
+		text-align: right;
+		color: #888888;
+		transition: .3s ease all; /*permite asignarle tiempo a la transicion*/
+	}
+	.popup .btn-cerrar-popup:hover{ 
+		color:black;
+	}
+	.popup h3{/*caracteristicas del titulo del popup*/
+		font-size: 36px;
+		font-weight: 600;
+		margin-bottom: 10px;
+		opacity: 0;
+	}
+	.popup h4{/*caracteristicas del subtitulo del popup*/
+		font-size: 26px;
+		font-weight: 300;
+		margin-bottom: 40px;
+		opacity: 0;
+	}
+	.popup form .contenedor-inputs{/*opasidad del contenedor de los inputs*/
+		opacity: 0;
+	}
+	.popup form .contenedor-inputs input{/*le damos preferencias a los inputs*/
+		width: 100%;
+		margin-bottom: 28px;
+		height: 37px;
+		line-height: 52px;
+		font-size: 18px;
+		text-align: center;
+		border: 1px solid #888888;
+	}
+	.popup form .btn-submit{/*le damos caracteristicas a el botón submit*/
+		padding: 0 20px;
+		height: 60px;
+		line-height: 40px;
+		border: none;
+		color: #fff;
+		background-color: #0D6EFD;
+		border-radius: 3px;
+		font-family: 'Montserrat', sans-serif;
+		font-size: 18px;
+		cursor: pointer;
+		transition: .3s ease all;
+	}
+	.popup form .btn-submit:hover{/*hacemos que el botón submit cambie de color al posicionar el cursor sobre este*/
+		background-color: #3788FF;
+	}
+	.popup.active{/*preferencias del popup cuando se encuentra en modo activo*/
+		opacity: 1;
+		transform: scale(1);
+	}
+	.popup.active h3{animation: entradaTitulo .8s ease .5s forwards;}
+	.popup.active h4{animation: entradaSubtitulo .8s ease .5s forwards;}
+	.popup.active .contenedor-inputs{animation: entradaInputs 1s ease 1s forwards;}
+	/*SE LOGRA REALIZAR UNAS "ANIMACIONES" QUE NO SON MAS QUE JUGAR CON LAS TRANSFORMACIONES*/
+	@keyframes entradaTitulo {/*"efecto de entrada de el titulo"*/
+		from{
+			transform: translateY(-25px);
+			opacity: 0;
+		}
+		to{
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
+	@keyframes entradaSubtitulo {/*"efecto de la entrada del subtitulo"*/
+		from{
+			transform: translateY(25px);
+			opacity: 0;
+		}
+		to{
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
+	@keyframes entradaInputs {/*"efecto" de la entrada de los inputs*/
+		form{
+			opacity: 0;
+		}
+		to{
+			opacity: 1;
+		}
+	}
+	.userTipe{
+		background-color: #ffffff;
+		width: 100%;
+		margin-bottom: 28px;
+		height: 37px;
+		line-height: 42px;
+		font-size: 18px;
+		text-align: center;
+		border: 1px solid #888888;
+	}
+
+</style>
+
+
+<%- include ('partials/_footer') %>

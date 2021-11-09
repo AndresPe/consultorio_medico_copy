@@ -1,0 +1,58 @@
+<%- include ('partials/_header')  %>
+
+<div class="formSignIn" > 
+    <style> 
+        .formSignIn{
+            padding: 40px;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin: auto;
+            margin-left: 35%;
+            position: relative;
+            width: 50%;
+            padding-right: 0px;
+            padding-left: 0px;
+        }
+        
+    </style>
+    <form  action="/home/sign-in/" method="post">
+        <fieldset>
+          <legend>Registro de nuevo afiliado</legend>
+          <p class="lead">Por favor no deje campos en blanco.</p>
+          <div class="form-group">
+            <% if (data) {%>
+              <div id="alertDataInvalid" class="alertDataInvalid alert-dismissible alert-warning">
+                <p class="mb-0"><%= data%></p>
+              </div>
+			      <% } %>
+            <label for="exampleInputText">Ingrese su identificación.</label>
+            <input type="text" name="idPaciente" class="form-control" id="idAfiliado" placeholder="Identificación">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputText">Ingrese su nombre completo.</label>
+            <input type="text" name="username" class="form-control" id="username" placeholder="Nombre">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Contraseña</label>
+            <input type="password" name="password" class="form-control" id="password" placeholder="Contraseña">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Ingrese nuevamente su contraseña</label>
+            <input type="password" name="passwordVerify" class="form-control" id="passwordVerify" placeholder="Confirmar contraseña">
+          </div>
+          <fieldset class="form-group">
+            <legend>Términos de uso</legend>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" name="check" type="checkbox" value="" >
+                Acepta nuestras póliticas de tratamiento de datos.
+              </label>
+            </div>
+          </fieldset>
+          <button type="submit" id="btnRegistrarAfiliado" class="btn btn-primary mt-3">Registrar</button>
+        </fieldset>
+    </form>
+</div>
+
+<%- include ('partials/_footer') %>

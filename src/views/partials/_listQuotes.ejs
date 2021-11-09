@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row mt-4">
+        
+        <div class="col-md-7">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <th>Código</th>
+                    <th>Paciente</th>
+                    <th>Consultorio</th>
+                    <th>Fecha programada</th>
+                    <th>Hora programada</th>
+                    <th>Fecha de asignación</th>
+                    <th>Última modificación</th>
+                    <th>Estado</th>
+                    <th>Descripción</th>
+                    <th>Acciones</th>
+                </thead>
+                <tbody>
+                    <% if (data) {%>
+                        <%for (var i = 0; i < data.length; i++) { %>
+                            <tr>
+                                <td><%= data[i].code %></td>
+                                <td><%= data[i].username %></td>
+                                <td><%= data[i].name %></td>
+                                <td><%= data[i].fechaAsignada %></td>
+                                <th><%= data[i].horaAsignada %></th>
+                                <td><%= data[i].fechaCreacion %></td>
+                                <td><%= data[i].fechaModificacion %></td>
+                                <% if (data[i].estado == 0){ %>
+                                    <td>Activo</td>
+                                <% } %>
+                                <% if (data[i].estado == 1){ %>
+                                    <td>Completado</td>
+                                <% } %>    
+                                <% if (data[i].estado == 2){ %>
+                                    <td>Cancelado</td>
+                                <% } %> 
+                                <td><%= data[i].detalles %></td>       
+                                <td>
+                                    <button class="">
+                                        <a href="/cancel/<%= data[i].code%>" class="btn btn-danger">Cancelar</a>
+                                    </button>
+                                    <button class="mt-3">
+                                        <a href="/update/<%= data[i].code%>" class="btn btn-warning">Editar</a>
+                                    </button>
+                                </td>
+                            </tr>
+                        <% } %>    
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
