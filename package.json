@@ -4,7 +4,8 @@
   "description": "Proyecto base que permite la administración de citas en consultorios médicos , también se usará como caso de pruebas BDD, ATDD Y TDD.",
   "main": "app.js",
   "scripts": {
-    "test": "cucumber-js"
+    "test": "jets",
+    "cucumber": "cucumber-js ./features -r ./steps"
   },
   "repository": {
     "type": "git",
